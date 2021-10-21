@@ -60,11 +60,6 @@ def info(bot, update):
     return ConversationHandler.END
 
 
-def cancel(update, _):
-    user = update.message.from_user
-    return ConversationHandler.END
-
-
 https_tunnel = str(ngrok.connect(str(APP_PORT), bind_tls=True)).split('"')[1]
 print("🎉 Ngrok подключен: " + https_tunnel)
 updater = Updater(token=TOKEN_BOT, use_context=True)
@@ -77,7 +72,7 @@ conv_handler = ConversationHandler(
         "REGISTER_NAME": [MessageHandler(Filters.text, register_name)],
         "REGISTER_PHONE": [MessageHandler(Filters.text, register_phone)],
     },
-    fallbacks=[CommandHandler('cancel', cancel)],
+    fallbacks=[],
 )
 dp.add_handler(conv_handler)
 
